@@ -1,0 +1,35 @@
+{
+  "name": "@code-test/table-server",
+  "version": "1.0.0",
+  "description": "Table - Code Test Server",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KieraDOG/dynamic-table-server"
+  },
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon .",
+    "start": "node ."
+  },
+  "keywords": [
+    "Koa",
+    "Query",
+    "Filter",
+    "Pagination"
+  ],
+  "author": "Long Zhao",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-qs": "^2.0.0",
+    "koa-router": "^7.4.0",
+    "koa-send": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}

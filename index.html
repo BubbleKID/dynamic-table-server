@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.1/styles/atom-one-dark-reasonable.min.css" />
+  <title>Dynamic Table</title>
+</head>
+<body>
+  <h1>Code Test</h1>
+  
+  <div style="background: #eeeeee; padding: 16px">
+    <h2 id="test">Test</h2>
+    
+    <p>Write an application by React, the implementation should do the following:</p>
+    
+    <ul>
+      <li>Two different pages /trades and /withdraws</li>
+      <li>Dynamic table includes pagination and filter (Use option from return body)</li>
+      <li>Apply search and reset</li>
+      <li>Instructions on how to run the app locally in your README.md. Total time taken to build the app in you README.md</li>
+      <li>Persistance result on user refresh page</li>
+    </ul>
+  </div>
+
+  <hr>
+  <h2>
+    <a href="/trades.json"><span data-origin></span>/trades.json</a>
+  </h2>
+  <pre>
+    <code class="json">
+      {
+        "trades": [{
+          "uuid": "693ff034-b28e-450e-a269-1628b7400415",
+          "createdAt": "1533008718000",
+          "updatedAt": "1553946222000",
+          "side": "ASK",
+          "volume": "0.6",
+          "price": "5692.23",
+          "tradingPair": {
+            "uuid": "345d3f5d-c90f-47cc-b0b0-4b0f06e6b3af",
+            "symbol": "BTC/AUD"
+          }
+        }],
+        "option": {
+          "tradingPair": {
+            "symbol": ["BTC/AUD", "ETH/AUD", "ETH/BTC"]
+          },
+          "side": ["ASK", "BID"]
+        },
+        "pagination": {
+          "number": 1,
+          "size": 10,
+          "total": 100
+        },
+        "filter": {
+          "side": {
+            "inq": ["ASK"]
+          },
+          "createdAt": {
+            "gte": "01/01/2018",
+            "lte": "31/12/2019"
+          },
+          "tradingPair": {
+            "symbol": {
+              "inq": ["BTC/AUD", "BTC/ETH"]
+            }
+          }
+        }
+      }
+    </code>
+  </pre>
+
+  <h3>Table</h3>
+  <ul>
+    <li>Col: Uuid, Updated at, Side, Volume, Price, Trading pair symbol</li>
+    <li>Filter: Side, Trading pair symbol</li>
+    <li>Search: Uuid, Volume, Price</li>
+    <li>Search by range: Updated at</li>
+  </ul>
+
+  <br>
+  <hr>
+  <h2>
+    <a href="/withdraws.json"><span data-origin></span>/withdraws.json</a>
+  </h2>
+  <pre>
+    <code class="json">
+      {
+        "withdraws": [{
+          "uuid": "98210ff8-1edc-4f72-b21c-28879c4ec650",
+          "createdAt": "2019-03-26T05:48:44.803Z",
+          "amount": "200.89",
+          "status": "PROCESSED",
+          "bankReferenceNumber": "JEWELERY"
+        }],
+        "option": {
+          "status": ["PROCESSED", "REJECTED"]
+        },
+        "pagination": {
+          "number": 1,
+          "size": 10,
+          "total": 100
+        },
+        "filter": {
+          "createdAt": {
+            "gte": "01/01/2018",
+            "lte": "31/12/2019"
+          },
+          "bankReferenceNumber": "JEWELERY" 
+        }
+      }
+    </code>
+  </pre>
+  
+  <h3>Table</h3>
+  <ul>
+    <li>Col: Uuid, Created at, Status, Amount, Bank reference number</li>
+    <li>Filter: Status</li>
+    <li>Search: Uuid, Amount, Bank reference number</li>
+    <li>Search by range: Created at</li>
+  </ul>
+
+  <br>
+  <hr>
+  <h2>Examples</h2>
+  
+  <pre>
+    <code><span data-origin></span>/trades.json?filter[createdAt][gte]=2018-01-01&&filter[created][lte]=2018-12-31&&filter[tradingPair][symbol][inq]=BTC/AUD&&filter[tradingPair][symbol][inq]=ETH/AUD&&number=3&&pagination[size]=5</code>
+  </pre>
+
+  <p>Search trades that createdAt in the range <strong>2018-01-01</strong> to <strong>2018-12-31</strong> and tradingPair's symbol includes <strong>BTC/AUD</strong> and <strong>ETH/AUD</strong>, and use pagination <strong>{number: 3, size: 5}</strong></p>
+  
+  <pre>
+    <code><span data-origin></span>/withdraws.json?filter[uuid]=98210ff8-1edc-4f72-b21c-28879c4ec650</code>
+  </pre>
+  
+  <p>Search withdraws that uuid is <strong>98210ff8-1edc-4f72-b21c-28879c4ec650</strong>, and use default pagination <strong>{number: 1, size: 10}</strong></p>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/json.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script>document.querySelectorAll('[data-origin]').forEach(e => e.innerText = document.location.origin)</script>
+</body>
+</html>
